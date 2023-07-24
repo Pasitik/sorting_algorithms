@@ -9,11 +9,11 @@
  * @size: Number of elements in @array
  */
 
-void bubble_sort(int *myarray, size_t size)
+void bubble_sort(int *array, size_t size)
 {
 	size_t  idx, i;
 	int temp;
-	
+
 	if (size < 2)
 		return;
 
@@ -21,12 +21,12 @@ void bubble_sort(int *myarray, size_t size)
 	{
 		for (idx = 0; idx < size - i - 1; idx++)
 		{
-			if (myarray[idx] > myarray[idx + 1])
+			if (array[idx] > array[idx + 1])
 			{
-				temp = myarray[idx];
-				myarray[idx] = myarray[idx + 1];
-				myarray[idx + 1] = temp;
-				print_array(myarray, size);
+				temp = array[idx];
+				array[idx] = array[idx + 1];
+				array[idx + 1] = temp;
+				print_array(array, size);
 			}
 		}
 	}
