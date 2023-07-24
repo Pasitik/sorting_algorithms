@@ -10,77 +10,39 @@
  *
  * Return: Pointer to the first element of the created list. NULL on failure
  */
-
-listint_t *create_listint(const int *array, size_t size)
-{
-	listint_t *list;
-	listint_t *node;
-	int *tmp;
-
-	list = NULL;
-	while (size--)
-	{
-		node = malloc(sizeof(*node));
-		if (!node)
-			return (NULL);
-		tmp = (int *)&node->n;
-		*tmp = array[size];
-		node->next = list;
-		node->prev = NULL;
-		list = node;
-		if (list->next)
-			list->next->prev = list;
-	}
-	return (list);
-}
-
-/**
- * insertion_sort_list - sorts a doubly
- * linked list from an array of integers
- *
- * @list: Array to convert to a doubly linked list
- *
- * Return: nothing
- */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *current = (*list)->next, *sorted_ptr, *temp_next;
+	listint_t * current = *list;
+	listint_t * prev, *temp;
+	int key;
 
-	if (list == NULL || *list == NULL || (*list)->next == NULL)
-		return;
-	while (current != NULL)
-	{
-		sorted_ptr = current->prev;
-		temp_next = current->next;
+	while(current != NULL)
+	{		
+		prev = current->prev;
+		temp = current;
 
-		if (sorted_ptr != NULL)
-			sorted_ptr->next = current->next;
-		else
-			(*list) = current->next;
-		if (current->next != NULL)
-			current->next->prev = current->prev;
-		while (sorted_ptr != NULL && sorted_ptr->n > current->n)
-			sorted_ptr = sorted_ptr->prev;
-
-		if (sorted_ptr == NULL)
+		while(prev != NULL && prev->n > temp->n) 
 		{
-			current->prev = NULL;
-			current->next = *list;
-
-			if (*list != NULL)
-				(*list)->prev = current;
-			(*list) = current;
+			prev->next = temp->next;
+			if (temp->next != NULL)
+			{
+				temp->next->prev = prev;
+			}
+			temp->next = prev;
+			temp->prev = prev->prev;
+			prev->prev = temp;
+			if (temp->prev != NULL)
+			{
+				temp->prev->next = temp;
+			}
+			else
+			{
+				*list = temp;
+			}
+			prev = temp->prev;
+			print_list(*list);
 		}
-		else
-		{
-			current->prev = sorted_ptr;
-			current->next = sorted_ptr->next;
 
-			if (sorted_ptr->next != NULL)
-				sorted_ptr->next->prev = current;
-			sorted_ptr->next = current;
-		}
-		current = temp_next;
-		print_list(*list);
+		current = current->next;
 	}
 }
