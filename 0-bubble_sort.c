@@ -11,7 +11,7 @@
 
 void bubble_sort(int *myarray, size_t size)
 {
-	int idx, i;
+	size_t  idx, i;
 	int temp;
 
 
