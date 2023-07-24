@@ -3,25 +3,23 @@
 #include "sort.h"
 
 /**
- * create_listint - Creates a doubly linked list from an array of integers
+ * insertion_sort_list - Creates a doubly linked list from an array of integers
  *
- * @array: Array to convert to a doubly linked list
- * @size: Size of the array
+ * @list: list to sort
  *
  * Return: Pointer to the first element of the created list. NULL on failure
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t * current = *list;
-	listint_t * prev, *temp;
-	int key;
+	listint_t *current = *list;
+	listint_t *prev, *temp;
 
-	while(current != NULL)
-	{		
+	while (current != NULL)
+	{
 		prev = current->prev;
 		temp = current;
 
-		while(prev != NULL && prev->n > temp->n) 
+		while (prev != NULL && prev->n > temp->n)
 		{
 			prev->next = temp->next;
 			if (temp->next != NULL)
@@ -46,3 +44,4 @@ void insertion_sort_list(listint_t **list)
 		current = current->next;
 	}
 }
+
