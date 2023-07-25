@@ -4,7 +4,7 @@
 #include "sort.h"
 
 listint_t *get_list_length(listint_t *h);
-void swap_nodes(listint_t **list, listint_t *node);
+int swap_nodes(listint_t **list, listint_t *node);
 
 /**
   * cocktail_sort_list - Sorts a doubly linked list
@@ -17,7 +17,7 @@ void swap_nodes(listint_t **list, listint_t *node);
 void cocktail_sort_list(listint_t **list)
 {
 	listint_t *curr = NULL, *left_limit = NULL, *right_limit = NULL;
-	int cycle_type = FORWARD;
+	int cycle_type = FORWARD, swapped = 1;
 
 	if (!list || !(*list) || !(*list)->next)
 		return;
@@ -25,33 +25,39 @@ void cocktail_sort_list(listint_t **list)
 	curr = *list;
 	left_limit = curr;
 	right_limit = get_list_length(*list);
-
-	while (left_limit != right_limit)
-	{
-		if (curr->n == curr->next->n)
-			break;
-		else if (curr->n > curr->next->n && cycle_type == FORWARD)
-			swap_nodes(list, curr), print_list(*list);
-		else if (curr->next->n < curr->n && cycle_type == BACKWARD)
-			swap_nodes(list, curr), curr = curr->prev, print_list(*list);
-		else if (cycle_type == FORWARD)
-			curr = curr->next;
-		else if (cycle_type == BACKWARD)
-			curr = curr->prev;
-
-		if (cycle_type == BACKWARD && curr->next == left_limit)
+	
+	do {
+		swapped = 0;
+		if (left_limit != right_limit)
 		{
-			cycle_type = FORWARD;
-			curr = curr->next;
-		}
+			if (curr->n == curr->next->n)
+				break;
+			else if (curr->n > curr->next->n && cycle_type == FORWARD)
+				swapped = swap_nodes(list, curr), print_list(*list);
+			else if (curr->next->n < curr->n && cycle_type == BACKWARD)
+				swapped = swap_nodes(list, curr), curr = curr->prev, print_list(*list);
+			else if (cycle_type == FORWARD)
+				curr = curr->next;
+			else if (cycle_type == BACKWARD)
+				curr = curr->prev;
 
-		if (cycle_type == FORWARD && curr->prev == right_limit)
-		{
-			right_limit = right_limit->prev;
-			cycle_type = BACKWARD;
-			curr = curr->prev;
+			if (cycle_type == BACKWARD && curr->next == left_limit)
+			{
+				cycle_type = FORWARD;
+				curr = curr->next;
+				swapped = 1;
+			}
+
+			if (cycle_type == FORWARD && curr->prev == right_limit)
+			{
+				right_limit = right_limit->prev;
+				cycle_type = BACKWARD;
+				curr = curr->prev;
+				swapped = 1;
+			}
+			swapped = 1;
 		}
-	}
+	} while(swapped);
 }
 
 /**
@@ -61,7 +67,7 @@ void cocktail_sort_list(listint_t **list)
   *
   * Return: Nothing!
   */
-void swap_nodes(listint_t **list, listint_t *node)
+int  swap_nodes(listint_t **list, listint_t *node)
 {
 	node->next->prev = node->prev;
 
@@ -76,6 +82,7 @@ void swap_nodes(listint_t **list, listint_t *node)
 
 	if (node->next)
 		node->next->prev = node;
+	return (1);
 }
 
 /**
@@ -87,6 +94,9 @@ void swap_nodes(listint_t **list, listint_t *node)
 listint_t *get_list_length(listint_t *h)
 {
 	listint_t *curr = h;
+
+	if (h == NULL)
+		return (NULL);
 
 	while (curr->next != NULL)
 		curr = curr->next;

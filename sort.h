@@ -33,6 +33,7 @@ int max(int *array, size_t size);
 void radix_sort(int *array, size_t size);
 void counting_sort(int *array, size_t size);
 void cocktail_sort_list(listint_t **list);
+void merge_sort(int *myarray, size_t size);
 
 #endif
 
