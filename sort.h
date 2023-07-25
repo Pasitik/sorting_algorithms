@@ -3,6 +3,10 @@
 
 #include <stddef.h>
 #include <stdlib.h>
+
+#define FORWARD 1
+#define BACKWARD -1
+
 /**
  * struct listint_s - Doubly linked list node
  *
@@ -29,4 +33,6 @@ int max(int *array, size_t size);
 void radix_sort(int *array, size_t size);
 void counting_sort(int *array, size_t size);
 void cocktail_sort_list(listint_t **list);
+
 #endif
+
