@@ -84,7 +84,7 @@ void merge_sort(int *myarray, size_t size)
 	size_t mid;
 	int  *left_half, *right_half;
 
-	if (size <= 2 || myarray == NULL)
+	if (size < 2 || myarray == NULL)
 	{
 		return;
 	}
