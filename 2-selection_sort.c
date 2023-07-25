@@ -10,26 +10,24 @@
  */
 void selection_sort(int *array, size_t size)
 {
-    size_t i = 0, j = 0, temp =0, min_value = 0;
+	size_t i, j, min_value, temp;
 
-    while (i < size)
-    {
-        min_value = i;
-        temp = 0;
-        j = i + 1;
-        while (j < size)
-        {
-            if (array[j] < array[min_value])
-            {
-                min_value = j;
-            }
-            j++;
-        }
-        temp = array[i];
-        array[i] = array[min_value];
-        array[min_value] = temp;
-        print_array(array, size);
-        i++;
-    }
+	for (i = 0; i < size; i++)
+	{
+		min_value = i;
+		for (j = i + 1; j < size; j++)
+		{
+			if (array[min_value] > array[j])
+				min_value = j;
+		}
+
+		if (min_value != i)
+		{
+			temp = array[i];
+			array[i] = array[min_value];
+			array[min_value] = temp;
+			print_array(array, size);
+		}
+	}
 }
 
