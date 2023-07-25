@@ -33,9 +33,19 @@ void counting_sort(int *array, size_t size)
 	int k = max(array, size);
 	int *count, *temp, i = 0;
 
+	if (size < 2 || array == NULL)
+		return;
 
 	temp = malloc (sizeof(int) * size);
+	if (temp == NULL)
+		return;
+
 	count = malloc (sizeof(int) * (k + 1));
+	if (count == NULL)
+	{
+		free(temp);
+		return;
+	}
 
 	for (i = 0; i <= k; i++)
 		count[i] = 0;
