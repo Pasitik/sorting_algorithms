@@ -9,15 +9,15 @@
  */
 int max(int *array, size_t size)
 {
-    int k = 0;
+	int k = 0;
 	size_t i = 0;
 
-    for (i = 0; i < size; i ++)
-    {
-        if (array[i] > k)
-            k = array[i];
-    }
-    return k;
+	for (i = 0; i < size; i++)
+	{
+		if (array[i] > k)
+			k = array[i];
+	}
+	return (k);
 }
 
 /**
@@ -26,33 +26,34 @@ int max(int *array, size_t size)
  * @array: An array of integers.
  * @size: The size of the array.
  * @pos: The position of the item.
+ * @temp: The temporary Array.
  */
 void count_sort(int *array, size_t size, int pos, int *temp)
 {
-    int k = 9, j = 0;
-    int count[10] = {0};
+	int k = 9, j = 0;
+	int count[10] = {0};
 	size_t i = 0;
 
 
-    for (i = 0; i < size; i++)
-    {
-        ++count[(array[i] / pos) % 10];
-    }
+	for (i = 0; i < size; i++)
+	{
+		++count[(array[i] / pos) % 10];
+	}
 
-    for (j = 1; j <=k; j++)
-    {
-        count[j] = count[j] + count[j - 1];
-    }
+	for (j = 1; j <= k; j++)
+	{
+		count[j] = count[j] + count[j - 1];
+	}
 
-    for (j = size - 1; j >= 0; j--)
-    {
-        temp[--count[((array[j] / pos) % 10)]] = array[j];
-    }
+	for (j = size - 1; j >= 0; j--)
+	{
+		temp[--count[((array[j] / pos) % 10)]] = array[j];
+	}
 
-    for (i = 0; i < size; i++)
-    {
-        array[i] = temp[i];
-    }
+	for (i = 0; i < size; i++)
+	{
+		array[i] = temp[i];
+	}
 
 }
 
@@ -70,9 +71,9 @@ void count_sort(int *array, size_t size, int pos, int *temp)
 void radix_sort(int *array, size_t size)
 {
 	int pos = 0;
-    int *temp;
+	int *temp;
 	int max_val = max(array, size);
-	
+
 	if (array == NULL || size < 2)
 		return;
 
@@ -82,10 +83,10 @@ void radix_sort(int *array, size_t size)
 		return;
 	}
 
-	for(pos = 1; max_val / pos > 0; pos *= 10)
+	for (pos = 1; max_val / pos > 0; pos *= 10)
 	{
 		count_sort(array, size, pos, temp);
-    	print_array(array, size);
+		print_array(array, size);
 	}
 	free(temp);
 }
