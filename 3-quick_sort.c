@@ -52,11 +52,11 @@ int partition(int *array, size_t size, int l, int r)
 }
 
 /**
- * lomuto_sort - Implement the quicksort algorithm through recursion.
+ * QuickSort - Implement the quicksort algorithm through recursion.
  * @array: An array of integers to sort.
  * @size: The size of the array.
- * @left: The starting index of the array partition to order.
- * @right: The ending index of the array partition to order.
+ * @l: The starting index of the array partition to order.
+ * @r: The ending index of the array partition to order.
  *
  * Description: Uses the Lomuto partition scheme.
  */
