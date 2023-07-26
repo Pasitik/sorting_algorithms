@@ -47,7 +47,6 @@ void heap_sort(int *array, size_t size)
 	for (i = (size / 2) - 1; i >= 0; i--)
 	{
 		max_heapify(array, size, size, i);
-		print_array(array, size);
 	}
 
 	for (i = size - 1; i > 0; i--)
