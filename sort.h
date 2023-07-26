@@ -3,6 +3,10 @@
 
 #include <stddef.h>
 #include <stdlib.h>
+
+#define FORWARD 1
+#define BACKWARD -1
+
 /**
  * struct listint_s - Doubly linked list node
  *
@@ -28,6 +32,12 @@ void shell_sort(int *array, size_t size);
 int max(int *array, size_t size);
 void radix_sort(int *array, size_t size);
 void counting_sort(int *array, size_t size);
+<<<<<<< HEAD
 void heap_sort(int *array, size_t size);
+=======
+void cocktail_sort_list(listint_t **list);
+void merge_sort(int *myarray, size_t size);
+>>>>>>> 34e04f6bce4f7987f5a2d163901bd8b5001b7dbc
 
 #endif
+
